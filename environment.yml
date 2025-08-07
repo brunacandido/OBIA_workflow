@@ -22,7 +22,7 @@ dependencies:
   - jupyterlab-lsp
   - pip
   - pip:
-      - nicky
+      - nickyspatial
       - pystac
       - pystac-client
       - stackstac
