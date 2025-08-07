@@ -21,7 +21,7 @@ def normalize(array):
 
 
 def calculate_ndvi(nir, red):
-    nir = nir.astype('float32')
+    nir = nir.astype(
     red = red.astype('float32')
     ndvi = (nir - red) / (nir + red + 1e-10)
     return ndvi
