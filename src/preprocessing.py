@@ -14,6 +14,12 @@ def load_band(path):
         profile = src.profile
     return band, profile
 
+def load_all_bands(path):
+    with rasterio.open(path) as src:
+        print("Number of bands:", src.count)
+        all_bands = src.read().astype(float) / 255
+    return all_bands
+
 
 def normalize(array):
     array = array.astype('float32')
@@ -21,10 +27,15 @@ def normalize(array):
 
 
 def calculate_ndvi(nir, red):
-    nir = nir.astype(
+    nir = nir.astype('float32')
     red = red.astype('float32')
     ndvi = (nir - red) / (nir + red + 1e-10)
     return ndvi
+
+def calculate_rgb(red, green, blue):
+    rgb = np.stack([red, green, blue], axis=-1)
+    rgb = rgb / np.max(rgb)
+    return rgb
 
 
 def clip_raster_with_shapefile(raster_path, shapefile_path):
