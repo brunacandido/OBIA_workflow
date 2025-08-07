@@ -1,0 +1,28 @@
+name: obia_workflow
+channels:
+  - conda-forge
+  - defaults
+dependencies:
+  - python=3.11
+  - rasterio
+  - gdal
+  - geopandas
+  - scikit-learn
+  - matplotlib
+  - numpy
+  - shapely
+  - pyproj
+  - xarray
+  - jupyterlab
+  - notebook
+  - ipykernel
+  - nb_conda_kernels
+  - jupyterlab_code_formatter
+  - python-lsp-server
+  - jupyterlab-lsp
+  - pip
+  - pip:
+      - nicky
+      - pystac
+      - pystac-client
+      - stackstac
