@@ -26,3 +26,4 @@ dependencies:
       - pystac
       - pystac-client
       - stackstac
+      - scikit-image

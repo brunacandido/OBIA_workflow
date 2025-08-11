@@ -1,7 +1,11 @@
+import numpy as np
 import matplotlib.pyplot as plt
 from sklearn.cluster import KMeans
-from skimage import measure, morphology
+from skimage import filters, measure, morphology, segmentation
 import rasterio
+from rasterio.plot import show
+import warnings
+warnings.filterwarnings('ignore')
 
 
 def load_sentinel2_image(image_path):
@@ -199,19 +203,7 @@ def run_segmentation_workflow(image_path, method='threshold'):
         print(f"{segment}: {data['pixel_count']} pixels, "
               f"NDVI: {data['mean_ndvi']:.3f}, "
               f"NDWI: {data['mean_ndwi']:.3f}")
+        
+    result = [bands, indices, segments, profile]
     
-    return bands, indices, segments, profile
-
-# Example usage:
-# bands, indices, segments, profile = run_segmentation_workflow('/Users/devseed/Documents/repos/OBIA_workflow/data/sample.tif', method='edge')
-# export_segmentation_results(segments, profile, 'segmentation_results.tif')
-
-def manual_treshold_segmentation(ndvi, 
-                                 threshold1, 
-                                 threshold2, 
-                                 threshold3,
-                                 treshold4):
-    thresholds = [threshold1, threshold2, threshold3, treshold4]
-    for i, threshold in enumerate(thresholds):
-        mask = ndvi > threshold
-    return mask
+    return result
