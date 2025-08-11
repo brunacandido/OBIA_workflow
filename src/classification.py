@@ -345,7 +345,7 @@ def run_classification_workflow(image_path, segments=None, stats_df=None):
         stats_df, segments, bands, indices)
     training_data = create_training_labels(stats_df)
     
-    if len(training_data) < 20:
+    if len(training_data) < 1:
         print("Warning: Very few training samples. Results may be unreliable.")
         return stats_df, {}, {}
     
