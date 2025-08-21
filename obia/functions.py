@@ -18,13 +18,13 @@ def calculate_rgb(red, green, blue):
     rgb = np.stack([red, green, blue], axis=-1)
     rgb_shape = rgb.shape
     rgb_size = rgb.size
-    return rgb, rgb_shape, rgb_size
+    return rgb
 
 def calculate_ndvi(red, nir):
     ndvi = (nir - red) / (nir + red + 1e-10)
     ndvi_shape = ndvi.shape
     ndvi_size = ndvi.size
-    return ndvi, ndvi_shape, ndvi_size
+    return ndvi
 
 def display_image(image):
     plt.figure(figsize=(6, 6))
@@ -102,4 +102,43 @@ def segmentation(image, segments, compactness, seg_mode,
                                      mode="thick")
     return segmentation, boundaries
 
+def calculate_segment_features(red, green, blue, nir, ndvi, segmentation):
+    ndvi = ndvi
+    unique_labels = np.unique(segmentation)
+    features_list = []
+    
+    for label in unique_labels:
+        if label == 0: 
+            continue
 
+        mask = segmentation == label
+        
+        if np.sum(mask) == 0:
+            continue
+        
+        red_vals = red[mask]
+        green_vals = green[mask]
+        blue_vals = blue[mask]
+        nir_vals = nir[mask]
+        ndvi_vals = ndvi[mask]
+        
+        features = {
+            'segment_id': label,
+            'red_mean': np.mean(red_vals),
+            'green_mean': np.mean(green_vals),
+            'blue_mean': np.mean(blue_vals),
+            'nir_mean': np.mean(nir_vals),
+            'red_std': np.std(red_vals),
+            'green_std': np.std(green_vals),
+            'blue_std': np.std(blue_vals),
+            'nir_std': np.std(nir_vals),
+            'intensity_mean': np.mean([red_vals, green_vals, blue_vals, nir_vals]),
+            'ndvi_mean': np.mean(ndvi_vals),
+            'ndvi_std': np.std(ndvi_vals),
+            'brightness': np.mean(red_vals + green_vals + blue_vals),
+            'vegetation_index': np.mean(nir_vals) / (np.mean(red_vals) + 1e-10)
+        }
+        
+        features_list.append(features)
+    
+    return pd.DataFrame(features_list)
