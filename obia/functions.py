@@ -26,9 +26,12 @@ def calculate_ndvi(red, nir):
     ndvi_size = ndvi.size
     return ndvi
 
-def display_image(image):
+def display_image(image, title='', colors=[], class_names=[]):
     plt.figure(figsize=(6, 6))
+    plt.title(title)
     plt.imshow(image)
+    colors = colors
+    class_names = class_names
     plt.axis('off')
     plt.show()
 
