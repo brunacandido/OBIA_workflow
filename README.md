@@ -1,56 +1,72 @@
-# OBIA_workflow
+# OBIA Workflow with Sentinel-2 Imagery
 
-# OBIA Workflow for Land Cover Classification Using Sentinel-2 Imagery
+This repository presents an **Object-Based Image Analysis (OBIA) workflow** developed in Python for processing and classifying Sentinel-2 satellite imagery. The work was carried out as part of the course *Application Development: Earth Observation*, within the Copernicus in Digital Earth (CDE) Master’s Programme.  
 
-## Project Description
+The aim is to demonstrate how OBIA concepts can be implemented in an **open-source environment**, supporting reproducibility and accessibility in Earth Observation research.
 
-This project implements a complete Object-Based Image Analysis (OBIA) workflow in an open-source environment using Sentinel-2 satellite imagery. The workflow includes three main steps: segmentation, feature extraction and statistics, and object-based classification. The objective is to demonstrate a reproducible and effective OBIA pipeline for land cover classification using freely available data and Python libraries. The implementation relies on the `nickyspatial` library and adapts existing OBIA tutorials.
+---
 
 ## Objectives
 
-- Implement an OBIA workflow using Sentinel-2 imagery
-- Apply image segmentation to delineate meaningful objects
-- Extract spectral, spatial, and texture features from segmented objects
-- Classify objects using supervised machine learning
-- Evaluate and visualize classification results
+The primary objectives of this project are:
 
-## Study Area
+- To implement a **complete OBIA workflow** in Python.  
+- To apply this workflow to **Sentinel-2 imagery**.  
+- To explore the methodological steps of OBIA, including:  
+  - Image preprocessing and visualization.  
+  - Segmentation of image objects.  
+  - Feature extraction and description of segments.  
+  - Classification of objects into meaningful land cover categories. 
+  - Compare different methods of segmentation and classification. 
+- To provide a **didactic Jupyter Notebook** that can be reproduced and adapted for further research.  
 
-The selected area will include diverse land cover types (e.g., coastal, agricultural, or urban regions) to test segmentation and classification performance.
+---
 
-## Tools & Libraries
+## Repository Structure
 
-- Python (Jupyter Notebooks)
-- [`nickyspatial`]
-- `rasterio`, `geopandas`, `scikit-learn`, `matplotlib`, `numpy`
-- Sentinel-2 L2A imagery (downloaded from Copernicus Open Access Hub)
+- **`obia_workflow.ipynb`**  
+  The central notebook containing the full OBIA workflow. It introduces the theoretical background, implements each step in Python, and discusses intermediate and final results.  
 
-## Workflow Tasks and Time Allocation
+- **`obia/`**
+ contains the code **`functions.py`**, which contains useful functions that support the implementation of the OBIA workflow in the notebook.
 
-| Task | Subtasks | Time (hrs) | Responsible |
-|------|----------|------------|-------------|
-| **1. Project Setup** | Define study area, gather imagery, install dependencies | 10 | Bruna & Beatriz |
-| **2. Literature & Tutorial Review** | Study OBIA concepts, explore `nickyspatial`, identify reusable code | 10 | Bruna & Beatriz |
-| **3. Image Preprocessing** | Resample, subset, select bands, cloud masking | 10 | Bruna |
-| **4. Segmentation** | Apply `nickyspatial` segmentation, tune parameters | 12 | Beatriz |
-| **5. Feature Extraction** | Extract NDVI, texture, geometry features | 10 | Bruna |
-| **6. Feature Statistics** | Compute summary statistics, visualize features | 10 | Beatriz |
-| **7. Classification** | Train/test split, train classifier (e.g., Random Forest) | 10 | Bruna |
-| **8. Accuracy Assessment** | Compute confusion matrix, accuracy, kappa | 8 | Beatriz |
-| **9. Visualization & Mapping** | Plot segmented objects, classification maps | 8 | Bruna |
-| **10. Documentation** | Document code and workflow steps | 6 | Bruna & Beatriz |
-| **11. Final Report** | Write and format final report | 6 | Bruna & Beatriz |
-| **Total** |  | **160 hours** | 80h each |
 
-## Expected Outcomes
+- **`data/`**  
+  Contain different image samples, to test the notebook.   
 
-- A complete OBIA pipeline in Python
-- Segmented and classified land cover map
-- Feature importance and accuracy evaluation
-- Final report detailing methods, results, and discussion
+- **`environment.yml`** 
+  To recriate the conda environment to reproduce the workflow.
 
-## Optional Stretch Goals
+---
 
-- Compare two segmentation algorithms
-- Use additional imagery sources (e.g., Landsat, PlanetScope)
-- Explore temporal analysis with multi-date imagery
+## Methodology and Workflow
+
+The notebook **`obia_workflow.ipynb`** implements the following methodological steps:
+
+1. **Setup and Libraries**  
+   Importation of required libraries (`numpy`, `pandas`, `geopandas`, `rasterio`, `scikit-learn`, `matplotlib`, `nickyspatial`) and configuration of the working environment.  
+
+2. **Data Input and Visualization**  
+   Reading Sentinel-2 imagery in `.tif` format and initial exploration of the dataset.  
+
+3. **Segmentation**  
+   Application of segmentation algorithms to delineate homogeneous image objects. Segmentation parameters are adjustable to balance detail and generalization. And a comparision of different types of segmentation is possible.
+
+4. **Feature Extraction**  
+   Calculation of spectral and spatial attributes for each object, so it is possible to see the image features.
+
+5. **Classification**  
+   Training and application of different classifier methods to assign objects to predefined land cover classes.  
+
+6. **Visualization and Export**  
+   - Visualization of intermediate and final classification results within the notebook.    
+
+---
+
+## Acknowledgments
+
+This work was developed as part of the **Copernicus in Digital Earth Master’s Programme**, course *Application Development: Earth Observation*.  
+
+It builds upon and acknowledges resources from:  
+- [dtiede/obia_tutorials_DT](https://github.com/dtiede/obia_tutorials_DT)  
+- [kshitijrajsharma/nickyspatial](https://github.com/kshitijrajsharma/nickyspatial)  
